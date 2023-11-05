@@ -1,6 +1,7 @@
 import { fetchCustomers, fetchInvoiceById } from "@/app/lib/data";
 import Breadcrumbs from "@/app/ui/invoices/breadcrumbs";
 import Form from "@/app/ui/invoices/edit-form";
+import { notFound } from "next/navigation";
 
 interface Params {
   params: {
@@ -14,6 +15,11 @@ export default async function Page({ params: { id } }: Params) {
     fetchInvoiceById(id),
     fetchCustomers()
   ])
+
+  if (!invoice) {
+    console.log('no existe')
+    notFound()
+  }
 
   return (
     <main>
