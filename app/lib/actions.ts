@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { sql } from "@vercel/postgres";
 import { z } from "zod";
 import { type } from "os";
+import { signIn } from "@/auth";
 
 export type State = {
   errors?: {
@@ -85,7 +86,7 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
 
   const { amount, customerId, status } = validatedFields.data
   const amountInCents = amount * 100;
-  
+
   try {
 
     await sql`
@@ -112,4 +113,20 @@ export async function deleteInvoice(id: string) {
     console.log(error);
     return { message: 'Database Error: Failed to Delete Invoice.' };
   }
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData
+) {
+
+  try {
+    await signIn('credentials', Object.fromEntries(formData))
+  } catch (error) {
+    if ((error as Error).message.includes('CredentialsSignin')) {
+      return 'CredentialsSignin'
+    }
+    throw error
+  }
+
 }
