@@ -3,6 +3,12 @@ import Breadcrumbs from "@/app/ui/invoices/breadcrumbs";
 import Form from "@/app/ui/invoices/edit-form";
 import { notFound } from "next/navigation";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Edit Customer'
+}
+
 interface Params {
   params: {
     id: string
@@ -17,7 +23,6 @@ export default async function Page({ params: { id } }: Params) {
   ])
 
   if (!invoice) {
-    console.log('no existe')
     notFound()
   }
 

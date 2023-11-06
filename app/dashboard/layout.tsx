@@ -1,10 +1,10 @@
 import { PropsWithChildren } from "react";
 import SideNav from "../ui/dashboard/sidenav"; "@/app/ui/dashboard/sidenav";
 
+
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-      <title>Dashboard</title>
       <div className="w-full flex-none md:w-64">
         <SideNav />
       </div>
