@@ -23,6 +23,7 @@ export default async function Page({ searchParams }: Props) {
   
   const query = searchParams?.query || ''
   const currentPage = Number(searchParams?.page) || 1
+  console.log(query);
   
   const totalPage = await fetchInvoicesPages(query)
 
@@ -33,6 +34,7 @@ export default async function Page({ searchParams }: Props) {
       </div>
       <div className="mt-4 items-center justify-between gap-2 md:mt-8">
         <Search placeholder="Search invoices..." />
+        <div className="mt-2"></div>
         <CreateInvoice />
         <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
           <Table query={query} currentPage={currentPage} />

@@ -10,7 +10,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   // NOTE: comment in this code when you get to this point in the course
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const currentPage = Number(searchParams.get('query')) || 1
+  const currentPage = Number(searchParams.get('page')) || 1
   const allPages = generatePagination(currentPage, totalPages);
 
   const createPageURL = (pageNumber: number | string) => {
@@ -82,13 +82,6 @@ function PaginationNumber({
       'text-gray-300': position === 'middle',
     },
   );
-
-  console.log({
-    page,
-    href,
-    isActive,
-    position,
-  });
 
   return isActive || position === 'middle' ? (
     <div className={className}>{page}</div>

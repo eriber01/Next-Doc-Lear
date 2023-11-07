@@ -8,6 +8,7 @@ import {
   LatestInvoiceRaw,
   User,
   Revenue,
+  Customer,
 } from './definitions';
 import { formatCurrency } from './utils';
 
@@ -19,12 +20,9 @@ export async function fetchRevenue() {
     // Artificially delay a reponse for demo purposes.
     // Don't do this in real life :)
 
-    console.log('Fetching revenue data...');
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
-
-    console.log('Data fetch complete after 3 seconds.');
 
     return data.rows;
   } catch (error) {
@@ -189,6 +187,26 @@ export async function fetchCustomers() {
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch all customers.');
+  }
+}
+
+export async function fetchCustomerById(id: string) {
+  noStore()
+  try {
+    const data = await sql<Customer>`
+      SELECT
+        id,
+        name,
+        email
+      FROM customers
+      WHERE id = ${id};
+    `;
+
+    const customer = data.rows[0]
+
+    return customer;
+  } catch (error) {
+    console.error('Database Error:', error);
   }
 }
 

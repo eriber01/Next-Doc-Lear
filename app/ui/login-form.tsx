@@ -8,7 +8,7 @@ import {
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
-import { authenticate } from '../lib/actions';
+import { authenticate } from '../lib/actions-login';
 
 export default function LoginForm() {
   const [code, action] = useFormState(authenticate, undefined)

@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Edit Customer'
+  title: 'Edit Invoices'
 }
 
 interface Params {
