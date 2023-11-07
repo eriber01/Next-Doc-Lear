@@ -17,7 +17,6 @@ interface Params {
 
 export default async function Page({ params: { id } }: Params) {
   const customer = await fetchCustomerById(id)
-  console.log({ customer });
 
   if (!customer) {
     notFound()

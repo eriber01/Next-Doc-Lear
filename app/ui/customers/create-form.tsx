@@ -10,7 +10,6 @@ import { createCustomer } from "@/app/lib/actions-customers";
 export default function Form() {
   const initialState = { message: null, errors: {} }
   const [state, dispatch] = useFormState(createCustomer, initialState)
-  console.log({ state });
 
   return (
     <form action={dispatch}>

@@ -29,10 +29,6 @@ const CustomerSchema = z.object({
 const CreateCustomer = CustomerSchema.omit({ id: true, image_url: true })
 
 export async function createCustomer(prevState: State, formData: FormData) {
-  console.log({
-    name: formData.get('name'),
-    email: formData.get('email')
-  });
 
   const validatedFields = CreateCustomer.safeParse({
     name: formData.get('name'),
@@ -80,7 +76,6 @@ export async function updateCustomer(id: string, prevState: State, formData: For
   }
 
   const { email, name } = validatedFields.data
-  console.log({ email, name });
 
   try {
     await sql`
@@ -89,8 +84,6 @@ export async function updateCustomer(id: string, prevState: State, formData: For
       WHERE id = ${id}
     `
   } catch (error) {
-    console.log(error);
-    
     return {
       message: 'Database Error: Failed to Edit Customer.',
     };
